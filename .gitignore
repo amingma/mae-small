@@ -1,0 +1,6 @@
+*.tex
+*.pdf
+*.png
+*.pt
+/data
+/__pycache__
