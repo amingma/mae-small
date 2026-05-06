@@ -1,12 +1,19 @@
 import math
+import os
+import random
 import torch
 import torch.nn as nn
 from einops import rearrange
+from timm.data.transforms_factory import create_transform
+from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 from timm.data.mixup import Mixup
-from timm.loss.cross_entropy import SoftTargetCrossEntropy, LabelSmoothingCrossEntropy
+from timm.loss.cross_entropy import SoftTargetCrossEntropy
 from timm.utils.model_ema import ModelEmaV3
 from timm.layers.drop import DropPath
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
 
+DATA_PATH = "/scratch/bgvu/nma1/project/data/imagenet100"
 IMG_SIZE = 224
 PATCH_SIZE = 16
 ENC_DIM = 768
@@ -14,6 +21,8 @@ ENC_HEADS = 12
 ENC_BLOCKS = 12
 NUM_PATCHES = (IMG_SIZE // PATCH_SIZE) ** 2
 DROP_PATH_RATE = 0.1
+
+random.seed(42)
 
 class PatchEmbed(nn.Module):
     def __init__(self, emb_dim=ENC_DIM, patch_size=PATCH_SIZE):
@@ -67,6 +76,62 @@ class ViTBase(nn.Module):
         cls_out = tokens[:, 0]
         return self.head(cls_out)
     
+def get_train_loader(data_path, num_classes=100, batch_size=128, num_workers=16):
+    train_transform = create_transform(
+        input_size=224,
+        is_training=True,
+        auto_augment='rand-m9-mstd0.5-inc1',
+        re_prob=0.25,
+        re_mode='pixel',
+        interpolation='bicubic',
+        mean=IMAGENET_DEFAULT_MEAN,
+        std=IMAGENET_DEFAULT_STD,
+    )
+
+    dataset = datasets.ImageFolder(os.path.join(data_path, 'train'), transform=train_transform)
+
+    # Pick num_classes random classes and keep all their samples
+    chosen_classes = random.sample(range(len(dataset.classes)), num_classes)
+    chosen_set     = set(chosen_classes)
+    label_map      = {orig: new for new, orig in enumerate(sorted(chosen_classes))}
+    indices        = [i for i, (_, label) in enumerate(dataset.samples) if label in chosen_set]
+
+    for i in indices:
+        path, orig            = dataset.samples[i]
+        dataset.samples[i]    = (path, label_map[orig])
+        dataset.targets[i]    = label_map[orig]
+
+    subset = torch.utils.data.Subset(dataset, indices)
+    print(f"Train: {len(subset):,} images, {num_classes} classes")
+
+    return DataLoader(subset, batch_size=batch_size, shuffle=True,
+                      num_workers=num_workers, pin_memory=True,
+                      drop_last=True, persistent_workers=True), label_map
+
+
+def get_val_loader(data_path, label_map, batch_size=128, num_workers=8):
+    val_transform = transforms.Compose([
+        transforms.Resize(256, interpolation=transforms.InterpolationMode.BICUBIC),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD),
+    ])
+
+    dataset  = datasets.ImageFolder(os.path.join(data_path, 'val'), transform=val_transform)
+    chosen_set = set(label_map.keys())
+    indices    = [i for i, (_, label) in enumerate(dataset.samples) if label in chosen_set]
+
+    for i in indices:
+        path, orig            = dataset.samples[i]
+        dataset.samples[i]    = (path, label_map[orig])
+        dataset.targets[i]    = label_map[orig]
+
+    subset = torch.utils.data.Subset(dataset, indices)
+    print(f"Val:   {len(subset):,} images, {len(label_map)} classes")
+
+    return DataLoader(subset, batch_size=batch_size, shuffle=False,
+                      num_workers=num_workers, pin_memory=True, persistent_workers=True)
+    
 def get_lr(epoch, warmup_epochs, total_epochs, base_lr, min_lr=1e-6):
     if epoch < warmup_epochs:
         return base_lr * epoch/warmup_epochs
@@ -106,8 +171,7 @@ def build_mixup(num_classes, mixup, cutmix):
     )
 
 def train(model, train_loader, val_loader, device, num_classes, 
-          total_epochs, warmup_epochs, base_lr, weight_decay, 
-          drop_path_rate):
+          total_epochs, warmup_epochs, base_lr, weight_decay):
     optimizer = build_optimizer(model, base_lr, weight_decay, beta1=0.9, beta2=0.95)
     mixup_fn = build_mixup(num_classes, mixup=0.8, cutmix=1.0)
     scaler = torch.amp.GradScaler()
@@ -157,3 +221,21 @@ def train(model, train_loader, val_loader, device, num_classes,
         val_acc = correct/total
         print(f"Epoch: {epoch} | Loss: {avg_loss:.4f} | Acc: {val_acc:.4f}")
     return model, ema_model
+
+if __name__ == "__main__":
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"Using device: {device}")
+    if device.type == 'cuda':
+        print(f"GPU: {torch.cuda.get_device_name(0)}")
+    
+    model =ViTBase().to(device)
+    num_params = sum(p.numel() for p in model.parameters())
+    print(f"Parameters: {num_params:,}")
+
+    train_loader, label_map = get_train_loader(data_path=DATA_PATH)
+    val_loader = get_val_loader(data_path=DATA_PATH, label_map = label_map)
+
+    model, ema_model = train(model, train_loader, val_loader, device, 100, 300, 20, 1e-4, 0.3, 0.1)
+
+    torch.save(model.state_dict, 'vit-b.pt')
+    print("Saved model to vit-b.pt")
