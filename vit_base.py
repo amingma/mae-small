@@ -13,7 +13,7 @@ from timm.layers.drop import DropPath
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
-DATA_PATH = "/scratch/bgvu/nma1/project/data/imagenet100"
+DATA_PATH = [YOUR PATH HERE]
 IMG_SIZE = 224
 PATCH_SIZE = 16
 ENC_DIM = 768
