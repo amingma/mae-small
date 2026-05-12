@@ -3,6 +3,7 @@ import os
 import random
 import torch
 import torch.nn as nn
+import time
 from einops import rearrange
 from timm.data.transforms_factory import create_transform
 from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
@@ -21,6 +22,7 @@ ENC_HEADS = 12
 ENC_BLOCKS = 12
 NUM_PATCHES = (IMG_SIZE // PATCH_SIZE) ** 2
 DROP_PATH_RATE = 0.2
+CHECKPOINT_PATH = "mae_imagenet.pt"
 
 random.seed(42)
 
@@ -53,12 +55,20 @@ class TransformerBlock(nn.Module):
         x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
     
+def sinusoidal_positional_encoding(num_patches, emb_dim):
+    pos = torch.arange(num_patches).unsqueeze(1).float()
+    dims = torch.arange(0, emb_dim, 2).float()
+    angles = pos/(10000 ** (dims/emb_dim))
+    pos_enc = torch.zeros((num_patches, emb_dim))
+    pos_enc[:, 0::2] = torch.sin(angles)
+    pos_enc[:, 1::2] = torch.cos(angles)
+    return pos_enc.unsqueeze(0)
+
 class ViTBase(nn.Module):
     def __init__(self, num_classes = 100):
         super().__init__()
         self.patch_embed = PatchEmbed()
-        self.cls_token = nn.Parameter(torch.zeros(1, 1, ENC_DIM))
-        self.pos_embed = nn.Parameter(torch.zeros(1, 1 + NUM_PATCHES, ENC_DIM))
+        self.register_buffer('pos_enc', sinusoidal_positional_encoding(NUM_PATCHES, ENC_DIM))
         self.blocks = nn.Sequential(*[
             TransformerBlock(ENC_DIM, ENC_HEADS) for _ in range(ENC_BLOCKS)
         ])
@@ -66,15 +76,12 @@ class ViTBase(nn.Module):
         self.head = nn.Linear(ENC_DIM, num_classes)
     
     def forward(self, x):
-        B = x.shape[0]
         tokens = self.patch_embed(x)
-        cls = self.cls_token.expand(B, -1, -1)
-        tokens = torch.cat([cls, tokens], dim=1)
-        tokens = tokens + self.pos_embed
+        tokens = tokens + self.pos_enc
         tokens = self.blocks(tokens)
         tokens = self.norm(tokens)
-        cls_out = tokens[:, 0]
-        return self.head(cls_out)
+        pooled = tokens.mean(dim=1)
+        return self.head(pooled)
     
 def get_train_loader(data_path, num_classes=100, batch_size=128, num_workers=16):
     train_transform = create_transform(
@@ -170,9 +177,26 @@ def build_mixup(num_classes, mixup, cutmix):
         num_classes = num_classes
     )
 
+def load_mae_encoder_weights(vit_model, mae_checkpoint_path, device):
+    mae_state = torch.load(mae_checkpoint_path, map_location=device)
+    
+    # Extract only the encoder weights, stripping the "encoder." prefix
+    encoder_weights = {
+        k.replace("encoder.", ""): v
+        for k, v in mae_state.items()
+        if k.startswith("encoder.")
+    }
+    
+    # Load into ViT, strict=False so the classification head is left randomly initialized
+    missing, unexpected = vit_model.load_state_dict(encoder_weights, strict=False)
+    print(f"Missing keys:    {missing}")      # expect: ['head.weight', 'head.bias']
+    print(f"Unexpected keys: {unexpected}")   # expect: []
+    
+    return vit_model
+
 def train(model, train_loader, val_loader, device, num_classes, 
           total_epochs, warmup_epochs, base_lr, weight_decay):
-    optimizer = build_optimizer(model, base_lr, weight_decay, beta1=0.9, beta2=0.95)
+    optimizer = build_optimizer(model, base_lr, weight_decay, beta1=0.9, beta2=0.999)
     mixup_fn = build_mixup(num_classes, mixup=0.8, cutmix=1.0)
     scaler = torch.amp.GradScaler()
     criterion = SoftTargetCrossEntropy()
@@ -183,6 +207,7 @@ def train(model, train_loader, val_loader, device, num_classes,
     accumulation_steps = target_batch_size // actual_batch_size
 
     for epoch in range(total_epochs):
+        start_time = time.time()
         lr = get_lr(epoch, warmup_epochs, total_epochs, base_lr)
         set_lr(optimizer, lr)
         model.train()
@@ -227,7 +252,8 @@ def train(model, train_loader, val_loader, device, num_classes,
                     correct += (preds == targets).sum().item()
                     total += targets.size(0)
         val_acc = correct/total
-        print(f"Epoch: {epoch} | Loss: {avg_loss:.4f} | Acc: {val_acc:.4f}")
+        epoch_time = time.time() - start_time
+        print(f"Epoch: {epoch} | Loss: {avg_loss:.4f} | Acc: {val_acc:.4f} | Time: {epoch_time:.1f}")
     return model, ema_model
 
 if __name__ == "__main__":
@@ -237,13 +263,14 @@ if __name__ == "__main__":
         print(f"GPU: {torch.cuda.get_device_name(0)}")
     
     model =ViTBase().to(device)
+    model = load_mae_encoder_weights(model, CHECKPOINT_PATH, device)
     num_params = sum(p.numel() for p in model.parameters())
     print(f"Parameters: {num_params:,}")
 
     train_loader, label_map = get_train_loader(data_path=DATA_PATH)
     val_loader = get_val_loader(data_path=DATA_PATH, label_map = label_map)
 
-    model, ema_model = train(model, train_loader, val_loader, device, 100, 800, 50, 1e-4, 0.3)
+    model, ema_model = train(model, train_loader, val_loader, device, 100, 200, 5, 1e-3, 0.05)
 
-    torch.save(model.state_dict(), 'vit-b.pt')
-    print("Saved model to vit-b.pt")
+    torch.save(model.state_dict(), 'vit-b_mae.pt')
+    print("Saved model to vit-b_mae.pt")
