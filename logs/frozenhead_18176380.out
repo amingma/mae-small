@@ -1,0 +1,228 @@
+Mon May 11 18:51:54 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.148.08             Driver Version: 570.148.08     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:C7:00.0 Off |                    0 |
+| N/A   30C    P0             51W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Using device: cuda
+GPU: NVIDIA A100-SXM4-40GB
+Missing keys:    ['head.weight', 'head.bias']
+Unexpected keys: []
+Parameters: 85,723,492
+Train: 49,104 images, 100 classes
+Val:   5,000 images, 100 classes
+Trainable parameters: 76,900
+Epoch: 0 | Loss: 4.6259 | Acc: 0.0096 | Time: 277.3
+Epoch: 1 | Loss: 4.5980 | Acc: 0.0096 | Time: 58.2
+Epoch: 2 | Loss: 4.5435 | Acc: 0.0100 | Time: 54.7
+Epoch: 3 | Loss: 4.4856 | Acc: 0.0100 | Time: 43.8
+Epoch: 4 | Loss: 4.4215 | Acc: 0.0102 | Time: 73.1
+Epoch: 5 | Loss: 4.3726 | Acc: 0.0112 | Time: 74.8
+Epoch: 6 | Loss: 4.3358 | Acc: 0.0118 | Time: 61.0
+Epoch: 7 | Loss: 4.3081 | Acc: 0.0126 | Time: 40.8
+Epoch: 8 | Loss: 4.2839 | Acc: 0.0132 | Time: 47.3
+Epoch: 9 | Loss: 4.2655 | Acc: 0.0140 | Time: 56.0
+Epoch: 10 | Loss: 4.2458 | Acc: 0.0164 | Time: 62.2
+Epoch: 11 | Loss: 4.2360 | Acc: 0.0178 | Time: 77.5
+Epoch: 12 | Loss: 4.2404 | Acc: 0.0200 | Time: 73.4
+Epoch: 13 | Loss: 4.2166 | Acc: 0.0226 | Time: 52.6
+Epoch: 14 | Loss: 4.2135 | Acc: 0.0250 | Time: 44.1
+Epoch: 15 | Loss: 4.2050 | Acc: 0.0298 | Time: 39.3
+Epoch: 16 | Loss: 4.2058 | Acc: 0.0324 | Time: 40.5
+Epoch: 17 | Loss: 4.2028 | Acc: 0.0362 | Time: 66.3
+Epoch: 18 | Loss: 4.1929 | Acc: 0.0428 | Time: 43.8
+Epoch: 19 | Loss: 4.1989 | Acc: 0.0500 | Time: 35.9
+Epoch: 20 | Loss: 4.1938 | Acc: 0.0562 | Time: 40.2
+Epoch: 21 | Loss: 4.1925 | Acc: 0.0642 | Time: 50.2
+Epoch: 22 | Loss: 4.1774 | Acc: 0.0714 | Time: 61.6
+Epoch: 23 | Loss: 4.1835 | Acc: 0.0806 | Time: 60.5
+Epoch: 24 | Loss: 4.1762 | Acc: 0.0876 | Time: 42.7
+Epoch: 25 | Loss: 4.1724 | Acc: 0.0944 | Time: 39.9
+Epoch: 26 | Loss: 4.1669 | Acc: 0.1030 | Time: 37.3
+Epoch: 27 | Loss: 4.1700 | Acc: 0.1122 | Time: 60.2
+Epoch: 28 | Loss: 4.1723 | Acc: 0.1200 | Time: 53.8
+Epoch: 29 | Loss: 4.1766 | Acc: 0.1274 | Time: 40.7
+Epoch: 30 | Loss: 4.1761 | Acc: 0.1382 | Time: 43.6
+Epoch: 31 | Loss: 4.1587 | Acc: 0.1454 | Time: 37.0
+Epoch: 32 | Loss: 4.1532 | Acc: 0.1532 | Time: 40.0
+Epoch: 33 | Loss: 4.1717 | Acc: 0.1606 | Time: 36.6
+Epoch: 34 | Loss: 4.1440 | Acc: 0.1712 | Time: 39.6
+Epoch: 35 | Loss: 4.1434 | Acc: 0.1776 | Time: 56.3
+Epoch: 36 | Loss: 4.1563 | Acc: 0.1858 | Time: 51.9
+Epoch: 37 | Loss: 4.1735 | Acc: 0.1928 | Time: 38.7
+Epoch: 38 | Loss: 4.1590 | Acc: 0.1982 | Time: 52.1
+Epoch: 39 | Loss: 4.1401 | Acc: 0.2044 | Time: 54.1
+Epoch: 40 | Loss: 4.1497 | Acc: 0.2108 | Time: 60.0
+Epoch: 41 | Loss: 4.1662 | Acc: 0.2182 | Time: 83.6
+Epoch: 42 | Loss: 4.1526 | Acc: 0.2240 | Time: 81.5
+Epoch: 43 | Loss: 4.1491 | Acc: 0.2304 | Time: 50.1
+Epoch: 44 | Loss: 4.1393 | Acc: 0.2356 | Time: 53.8
+Epoch: 45 | Loss: 4.1586 | Acc: 0.2414 | Time: 60.4
+Epoch: 46 | Loss: 4.1454 | Acc: 0.2442 | Time: 52.0
+Epoch: 47 | Loss: 4.1371 | Acc: 0.2480 | Time: 51.6
+Epoch: 48 | Loss: 4.1288 | Acc: 0.2522 | Time: 58.1
+Epoch: 49 | Loss: 4.1486 | Acc: 0.2564 | Time: 43.2
+Epoch: 50 | Loss: 4.1458 | Acc: 0.2584 | Time: 55.6
+Epoch: 51 | Loss: 4.1309 | Acc: 0.2632 | Time: 52.1
+Epoch: 52 | Loss: 4.1339 | Acc: 0.2684 | Time: 72.0
+Epoch: 53 | Loss: 4.1102 | Acc: 0.2720 | Time: 75.2
+Epoch: 54 | Loss: 4.1280 | Acc: 0.2756 | Time: 49.2
+Epoch: 55 | Loss: 4.1201 | Acc: 0.2810 | Time: 42.0
+Epoch: 56 | Loss: 4.1355 | Acc: 0.2852 | Time: 54.4
+Epoch: 57 | Loss: 4.1368 | Acc: 0.2880 | Time: 58.4
+Epoch: 58 | Loss: 4.1448 | Acc: 0.2916 | Time: 68.1
+Epoch: 59 | Loss: 4.1331 | Acc: 0.2954 | Time: 91.4
+Epoch: 60 | Loss: 4.1488 | Acc: 0.2992 | Time: 65.1
+Epoch: 61 | Loss: 4.1347 | Acc: 0.3030 | Time: 46.7
+Epoch: 62 | Loss: 4.1239 | Acc: 0.3058 | Time: 59.2
+Epoch: 63 | Loss: 4.1315 | Acc: 0.3066 | Time: 79.0
+Epoch: 64 | Loss: 4.1224 | Acc: 0.3096 | Time: 52.9
+Epoch: 65 | Loss: 4.1386 | Acc: 0.3140 | Time: 46.4
+Epoch: 66 | Loss: 4.1313 | Acc: 0.3162 | Time: 64.8
+Epoch: 67 | Loss: 4.1166 | Acc: 0.3198 | Time: 65.8
+Epoch: 68 | Loss: 4.1316 | Acc: 0.3200 | Time: 55.8
+Epoch: 69 | Loss: 4.1088 | Acc: 0.3218 | Time: 57.8
+Epoch: 70 | Loss: 4.1114 | Acc: 0.3250 | Time: 72.4
+Epoch: 71 | Loss: 4.1117 | Acc: 0.3262 | Time: 59.4
+Epoch: 72 | Loss: 4.1174 | Acc: 0.3280 | Time: 83.4
+Epoch: 73 | Loss: 4.1298 | Acc: 0.3304 | Time: 69.7
+Epoch: 74 | Loss: 4.1148 | Acc: 0.3312 | Time: 58.7
+Epoch: 75 | Loss: 4.1202 | Acc: 0.3348 | Time: 44.5
+Epoch: 76 | Loss: 4.1183 | Acc: 0.3368 | Time: 68.0
+Epoch: 77 | Loss: 4.1209 | Acc: 0.3378 | Time: 59.0
+Epoch: 78 | Loss: 4.1161 | Acc: 0.3402 | Time: 37.1
+Epoch: 79 | Loss: 4.1140 | Acc: 0.3414 | Time: 44.2
+Epoch: 80 | Loss: 4.1311 | Acc: 0.3426 | Time: 45.1
+Epoch: 81 | Loss: 4.1177 | Acc: 0.3432 | Time: 43.7
+Epoch: 82 | Loss: 4.1153 | Acc: 0.3444 | Time: 54.1
+Epoch: 83 | Loss: 4.1121 | Acc: 0.3458 | Time: 45.8
+Epoch: 84 | Loss: 4.1297 | Acc: 0.3464 | Time: 36.8
+Epoch: 85 | Loss: 4.1124 | Acc: 0.3482 | Time: 34.4
+Epoch: 86 | Loss: 4.1094 | Acc: 0.3496 | Time: 37.4
+Epoch: 87 | Loss: 4.1202 | Acc: 0.3502 | Time: 38.5
+Epoch: 88 | Loss: 4.0993 | Acc: 0.3512 | Time: 50.7
+Epoch: 89 | Loss: 4.1121 | Acc: 0.3518 | Time: 52.8
+Epoch: 90 | Loss: 4.1049 | Acc: 0.3532 | Time: 55.6
+Epoch: 91 | Loss: 4.1137 | Acc: 0.3556 | Time: 41.5
+Epoch: 92 | Loss: 4.1015 | Acc: 0.3568 | Time: 37.4
+Epoch: 93 | Loss: 4.1213 | Acc: 0.3564 | Time: 36.9
+Epoch: 94 | Loss: 4.1225 | Acc: 0.3564 | Time: 35.3
+Epoch: 95 | Loss: 4.1137 | Acc: 0.3568 | Time: 37.9
+Epoch: 96 | Loss: 4.1141 | Acc: 0.3576 | Time: 40.8
+Epoch: 97 | Loss: 4.1092 | Acc: 0.3570 | Time: 42.7
+Epoch: 98 | Loss: 4.1076 | Acc: 0.3586 | Time: 49.9
+Epoch: 99 | Loss: 4.1139 | Acc: 0.3588 | Time: 36.5
+Epoch: 100 | Loss: 4.1081 | Acc: 0.3592 | Time: 36.7
+Epoch: 101 | Loss: 4.1191 | Acc: 0.3598 | Time: 37.1
+Epoch: 102 | Loss: 4.1088 | Acc: 0.3606 | Time: 35.9
+Epoch: 103 | Loss: 4.0993 | Acc: 0.3624 | Time: 39.2
+Epoch: 104 | Loss: 4.1166 | Acc: 0.3632 | Time: 43.2
+Epoch: 105 | Loss: 4.1134 | Acc: 0.3640 | Time: 43.6
+Epoch: 106 | Loss: 4.1108 | Acc: 0.3652 | Time: 38.3
+Epoch: 107 | Loss: 4.1043 | Acc: 0.3664 | Time: 47.3
+Epoch: 108 | Loss: 4.1171 | Acc: 0.3674 | Time: 38.5
+Epoch: 109 | Loss: 4.0988 | Acc: 0.3682 | Time: 44.3
+Epoch: 110 | Loss: 4.1271 | Acc: 0.3682 | Time: 61.0
+Epoch: 111 | Loss: 4.0939 | Acc: 0.3682 | Time: 59.2
+Epoch: 112 | Loss: 4.1153 | Acc: 0.3686 | Time: 41.9
+Epoch: 113 | Loss: 4.1052 | Acc: 0.3694 | Time: 35.6
+Epoch: 114 | Loss: 4.1071 | Acc: 0.3700 | Time: 37.9
+Epoch: 115 | Loss: 4.1040 | Acc: 0.3706 | Time: 38.5
+Epoch: 116 | Loss: 4.0999 | Acc: 0.3708 | Time: 35.4
+Epoch: 117 | Loss: 4.1041 | Acc: 0.3716 | Time: 36.8
+Epoch: 118 | Loss: 4.1167 | Acc: 0.3714 | Time: 34.7
+Epoch: 119 | Loss: 4.1081 | Acc: 0.3720 | Time: 37.1
+Epoch: 120 | Loss: 4.1068 | Acc: 0.3726 | Time: 37.1
+Epoch: 121 | Loss: 4.1067 | Acc: 0.3742 | Time: 36.9
+Epoch: 122 | Loss: 4.0971 | Acc: 0.3740 | Time: 38.7
+Epoch: 123 | Loss: 4.1028 | Acc: 0.3746 | Time: 36.1
+Epoch: 124 | Loss: 4.0987 | Acc: 0.3752 | Time: 46.1
+Epoch: 125 | Loss: 4.1017 | Acc: 0.3758 | Time: 38.7
+Epoch: 126 | Loss: 4.0980 | Acc: 0.3770 | Time: 48.1
+Epoch: 127 | Loss: 4.1057 | Acc: 0.3772 | Time: 37.1
+Epoch: 128 | Loss: 4.1041 | Acc: 0.3766 | Time: 34.5
+Epoch: 129 | Loss: 4.0902 | Acc: 0.3770 | Time: 38.1
+Epoch: 130 | Loss: 4.0928 | Acc: 0.3772 | Time: 38.8
+Epoch: 131 | Loss: 4.0884 | Acc: 0.3772 | Time: 38.9
+Epoch: 132 | Loss: 4.1033 | Acc: 0.3786 | Time: 45.7
+Epoch: 133 | Loss: 4.1034 | Acc: 0.3794 | Time: 47.7
+Epoch: 134 | Loss: 4.1028 | Acc: 0.3802 | Time: 46.0
+Epoch: 135 | Loss: 4.0929 | Acc: 0.3808 | Time: 39.7
+Epoch: 136 | Loss: 4.1000 | Acc: 0.3818 | Time: 35.1
+Epoch: 137 | Loss: 4.0892 | Acc: 0.3820 | Time: 35.0
+Epoch: 138 | Loss: 4.0970 | Acc: 0.3824 | Time: 35.2
+Epoch: 139 | Loss: 4.1012 | Acc: 0.3828 | Time: 42.3
+Epoch: 140 | Loss: 4.1046 | Acc: 0.3836 | Time: 42.7
+Epoch: 141 | Loss: 4.1132 | Acc: 0.3838 | Time: 36.1
+Epoch: 142 | Loss: 4.0851 | Acc: 0.3846 | Time: 34.5
+Epoch: 143 | Loss: 4.1088 | Acc: 0.3852 | Time: 37.2
+Epoch: 144 | Loss: 4.0996 | Acc: 0.3854 | Time: 34.8
+Epoch: 145 | Loss: 4.0772 | Acc: 0.3862 | Time: 34.4
+Epoch: 146 | Loss: 4.1066 | Acc: 0.3860 | Time: 34.9
+Epoch: 147 | Loss: 4.1072 | Acc: 0.3864 | Time: 34.3
+Epoch: 148 | Loss: 4.1008 | Acc: 0.3866 | Time: 36.8
+Epoch: 149 | Loss: 4.0983 | Acc: 0.3874 | Time: 34.7
+Epoch: 150 | Loss: 4.0986 | Acc: 0.3876 | Time: 35.1
+Epoch: 151 | Loss: 4.0929 | Acc: 0.3880 | Time: 34.7
+Epoch: 152 | Loss: 4.0993 | Acc: 0.3882 | Time: 36.9
+Epoch: 153 | Loss: 4.0977 | Acc: 0.3882 | Time: 44.8
+Epoch: 154 | Loss: 4.1054 | Acc: 0.3886 | Time: 38.5
+Epoch: 155 | Loss: 4.0990 | Acc: 0.3886 | Time: 41.7
+Epoch: 156 | Loss: 4.1068 | Acc: 0.3894 | Time: 44.7
+Epoch: 157 | Loss: 4.1036 | Acc: 0.3888 | Time: 46.3
+Epoch: 158 | Loss: 4.0862 | Acc: 0.3892 | Time: 43.4
+Epoch: 159 | Loss: 4.0935 | Acc: 0.3894 | Time: 35.7
+Epoch: 160 | Loss: 4.1002 | Acc: 0.3900 | Time: 35.6
+Epoch: 161 | Loss: 4.0991 | Acc: 0.3904 | Time: 35.3
+Epoch: 162 | Loss: 4.1085 | Acc: 0.3906 | Time: 34.7
+Epoch: 163 | Loss: 4.0951 | Acc: 0.3912 | Time: 35.1
+Epoch: 164 | Loss: 4.1038 | Acc: 0.3914 | Time: 36.7
+Epoch: 165 | Loss: 4.1104 | Acc: 0.3912 | Time: 35.9
+Epoch: 166 | Loss: 4.1062 | Acc: 0.3914 | Time: 37.7
+Epoch: 167 | Loss: 4.1124 | Acc: 0.3916 | Time: 36.2
+Epoch: 168 | Loss: 4.1118 | Acc: 0.3918 | Time: 34.9
+Epoch: 169 | Loss: 4.0933 | Acc: 0.3920 | Time: 34.3
+Epoch: 170 | Loss: 4.0987 | Acc: 0.3928 | Time: 35.4
+Epoch: 171 | Loss: 4.1018 | Acc: 0.3926 | Time: 36.0
+Epoch: 172 | Loss: 4.1165 | Acc: 0.3920 | Time: 35.3
+Epoch: 173 | Loss: 4.0922 | Acc: 0.3918 | Time: 34.6
+Epoch: 174 | Loss: 4.1002 | Acc: 0.3922 | Time: 35.7
+Epoch: 175 | Loss: 4.1007 | Acc: 0.3922 | Time: 47.4
+Epoch: 176 | Loss: 4.0880 | Acc: 0.3924 | Time: 44.4
+Epoch: 177 | Loss: 4.0926 | Acc: 0.3926 | Time: 34.9
+Epoch: 178 | Loss: 4.0957 | Acc: 0.3932 | Time: 38.4
+Epoch: 179 | Loss: 4.0821 | Acc: 0.3934 | Time: 41.4
+Epoch: 180 | Loss: 4.0906 | Acc: 0.3938 | Time: 46.6
+Epoch: 181 | Loss: 4.0858 | Acc: 0.3942 | Time: 49.5
+Epoch: 182 | Loss: 4.0981 | Acc: 0.3944 | Time: 42.9
+Epoch: 183 | Loss: 4.0886 | Acc: 0.3950 | Time: 35.0
+Epoch: 184 | Loss: 4.1017 | Acc: 0.3952 | Time: 34.9
+Epoch: 185 | Loss: 4.0866 | Acc: 0.3950 | Time: 34.8
+Epoch: 186 | Loss: 4.1021 | Acc: 0.3956 | Time: 35.9
+Epoch: 187 | Loss: 4.0770 | Acc: 0.3958 | Time: 39.2
+Epoch: 188 | Loss: 4.0842 | Acc: 0.3958 | Time: 34.6
+Epoch: 189 | Loss: 4.0902 | Acc: 0.3966 | Time: 35.1
+Epoch: 190 | Loss: 4.0992 | Acc: 0.3968 | Time: 34.6
+Epoch: 191 | Loss: 4.1026 | Acc: 0.3972 | Time: 37.5
+Epoch: 192 | Loss: 4.0850 | Acc: 0.3974 | Time: 36.2
+Epoch: 193 | Loss: 4.1021 | Acc: 0.3976 | Time: 35.5
+Epoch: 194 | Loss: 4.0858 | Acc: 0.3976 | Time: 34.8
+Epoch: 195 | Loss: 4.0982 | Acc: 0.3978 | Time: 36.2
+Epoch: 196 | Loss: 4.0836 | Acc: 0.3972 | Time: 35.0
+Epoch: 197 | Loss: 4.1012 | Acc: 0.3970 | Time: 36.8
+Epoch: 198 | Loss: 4.0987 | Acc: 0.3972 | Time: 34.8
+Epoch: 199 | Loss: 4.0974 | Acc: 0.3972 | Time: 37.6

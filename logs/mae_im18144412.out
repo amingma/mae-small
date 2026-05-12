@@ -1,0 +1,102 @@
+Sat May  9 11:52:02 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.148.08             Driver Version: 570.148.08     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          On  |   00000000:85:00.0 Off |                    0 |
+| N/A   30C    P0             76W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Training
+Pretrain: 490,712 images across 1000 classes
+Epoch   1/80 | Train Loss: 0.643 | Time: 1816.4s
+Epoch   2/80 | Train Loss: 0.463 | Time: 885.0s
+Epoch   3/80 | Train Loss: 0.415 | Time: 727.3s
+Epoch   4/80 | Train Loss: 0.386 | Time: 684.1s
+Epoch   5/80 | Train Loss: 0.369 | Time: 1149.2s
+Epoch   6/80 | Train Loss: 0.358 | Time: 850.5s
+Epoch   7/80 | Train Loss: 0.349 | Time: 823.5s
+Epoch   8/80 | Train Loss: 0.343 | Time: 654.0s
+Epoch   9/80 | Train Loss: 0.338 | Time: 905.7s
+Epoch  10/80 | Train Loss: 0.333 | Time: 1324.4s
+Epoch  11/80 | Train Loss: 0.329 | Time: 1203.8s
+Epoch  12/80 | Train Loss: 0.326 | Time: 975.5s
+Epoch  13/80 | Train Loss: 0.323 | Time: 2038.7s
+Epoch  14/80 | Train Loss: 0.320 | Time: 1106.9s
+Epoch  15/80 | Train Loss: 0.318 | Time: 678.6s
+Epoch  16/80 | Train Loss: 0.316 | Time: 765.8s
+Epoch  17/80 | Train Loss: 0.314 | Time: 1288.5s
+Epoch  18/80 | Train Loss: 0.313 | Time: 1573.9s
+Epoch  19/80 | Train Loss: 0.311 | Time: 930.1s
+Epoch  20/80 | Train Loss: 0.310 | Time: 1402.6s
+Epoch  21/80 | Train Loss: 0.309 | Time: 1852.7s
+Epoch  22/80 | Train Loss: 0.308 | Time: 1138.5s
+Epoch  23/80 | Train Loss: 0.307 | Time: 703.1s
+Epoch  24/80 | Train Loss: 0.306 | Time: 788.3s
+Epoch  25/80 | Train Loss: 0.305 | Time: 997.6s
+Epoch  26/80 | Train Loss: 0.304 | Time: 964.3s
+Epoch  27/80 | Train Loss: 0.303 | Time: 764.5s
+Epoch  28/80 | Train Loss: 0.302 | Time: 727.3s
+Epoch  29/80 | Train Loss: 0.301 | Time: 1727.5s
+Epoch  30/80 | Train Loss: 0.301 | Time: 927.1s
+Epoch  31/80 | Train Loss: 0.300 | Time: 568.2s
+Epoch  32/80 | Train Loss: 0.299 | Time: 662.6s
+Epoch  33/80 | Train Loss: 0.299 | Time: 974.4s
+Epoch  34/80 | Train Loss: 0.298 | Time: 877.9s
+Epoch  35/80 | Train Loss: 0.297 | Time: 624.8s
+Epoch  36/80 | Train Loss: 0.297 | Time: 640.6s
+Epoch  37/80 | Train Loss: 0.296 | Time: 1513.4s
+Epoch  38/80 | Train Loss: 0.296 | Time: 996.9s
+Epoch  39/80 | Train Loss: 0.295 | Time: 550.1s
+Epoch  40/80 | Train Loss: 0.294 | Time: 679.8s
+Epoch  41/80 | Train Loss: 0.294 | Time: 1128.2s
+Epoch  42/80 | Train Loss: 0.293 | Time: 838.0s
+Epoch  43/80 | Train Loss: 0.293 | Time: 722.2s
+Epoch  44/80 | Train Loss: 0.292 | Time: 605.6s
+Epoch  45/80 | Train Loss: 0.292 | Time: 1437.5s
+Epoch  46/80 | Train Loss: 0.291 | Time: 911.2s
+Epoch  47/80 | Train Loss: 0.291 | Time: 592.6s
+Epoch  48/80 | Train Loss: 0.290 | Time: 624.8s
+Epoch  49/80 | Train Loss: 0.290 | Time: 1136.8s
+Epoch  50/80 | Train Loss: 0.289 | Time: 617.4s
+Epoch  51/80 | Train Loss: 0.289 | Time: 728.6s
+Epoch  52/80 | Train Loss: 0.288 | Time: 1156.8s
+Epoch  53/80 | Train Loss: 0.288 | Time: 931.0s
+Epoch  54/80 | Train Loss: 0.288 | Time: 785.4s
+Epoch  55/80 | Train Loss: 0.287 | Time: 660.3s
+Epoch  56/80 | Train Loss: 0.287 | Time: 679.8s
+Epoch  57/80 | Train Loss: 0.286 | Time: 894.8s
+Epoch  58/80 | Train Loss: 0.286 | Time: 815.0s
+Epoch  59/80 | Train Loss: 0.286 | Time: 689.8s
+Epoch  60/80 | Train Loss: 0.285 | Time: 591.0s
+Epoch  61/80 | Train Loss: 0.285 | Time: 1353.7s
+Epoch  62/80 | Train Loss: 0.285 | Time: 778.6s
+Epoch  63/80 | Train Loss: 0.284 | Time: 555.9s
+Epoch  64/80 | Train Loss: 0.284 | Time: 633.6s
+Epoch  65/80 | Train Loss: 0.284 | Time: 787.6s
+Epoch  66/80 | Train Loss: 0.284 | Time: 817.5s
+Epoch  67/80 | Train Loss: 0.283 | Time: 611.4s
+Epoch  68/80 | Train Loss: 0.283 | Time: 637.2s
+Epoch  69/80 | Train Loss: 0.283 | Time: 1140.7s
+Epoch  70/80 | Train Loss: 0.283 | Time: 838.0s
+Epoch  71/80 | Train Loss: 0.282 | Time: 612.6s
+Epoch  72/80 | Train Loss: 0.282 | Time: 648.8s
+Epoch  73/80 | Train Loss: 0.282 | Time: 788.3s
+Epoch  74/80 | Train Loss: 0.282 | Time: 743.2s
+Epoch  75/80 | Train Loss: 0.282 | Time: 874.2s
+Epoch  76/80 | Train Loss: 0.282 | Time: 1184.1s
+Epoch  77/80 | Train Loss: 0.282 | Time: 2525.3s
+Epoch  78/80 | Train Loss: 0.282 | Time: 1557.6s
+Epoch  79/80 | Train Loss: 0.282 | Time: 832.5s
+Epoch  80/80 | Train Loss: 0.282 | Time: 872.7s
