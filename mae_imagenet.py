@@ -8,7 +8,7 @@ from einops import rearrange
 import time
 from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 
-DATA_PATH = "/scratch/bgvu/nma1/project/data/imagenet100"
+DATA_PATH = [YOUR PATH HERE]
 BATCH_SIZE = 128
 ENC_DIM = 768
 DEC_DIM = 512
